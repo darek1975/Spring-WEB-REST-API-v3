@@ -1,0 +1,14 @@
+package com.crud.tasks9;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+@SpringBootApplication
+public class Tasks9Application extends SpringBootServletInitializer {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Tasks9Application.class, args);
+	}
+
+}
