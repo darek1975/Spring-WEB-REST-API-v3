@@ -1,32 +1,18 @@
-call gradlew build
-if "%ERRORLEVEL%" == "0" goto rename
+call runcrud
+if "%ERRORLEVEL%" == "0" goto chromestart
 echo.
 echo GRADLEW BUILD has errors - breaking work
 goto fail
 
-:rename
-del build\libs\crud.war
-ren build\libs\tasks-0.0.1-SNAPSHOT.war crud.war
-if "%ERRORLEVEL%" == "0" goto stoptomcat
-echo Cannot rename file
-goto fail
-
-:stoptomcat
-call %CATALINA_HOME%\bin\shutdown.bat
-
-:copyfile
-copy build\libs\crud.war %CATALINA_HOME%\webapps
-if "%ERRORLEVEL%" == "0" goto runtomcat
-echo Cannot copy file
-goto fail
-
-:runtomcat
-call %CATALINA_HOME%\bin\startup.bat
-goto end
+:chromestart
+start chrome "http://localhost:8080/crud/v1/task/getTasks"
+if "%ERRORLEVEL%" == "0" goto end
+echo.
+echo Cannot open Chrome, something went wrong
 
 :fail
 echo.
-echo There were errors
+echo There were errors!
 
 :end
 echo.
